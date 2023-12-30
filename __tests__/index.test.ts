@@ -3,6 +3,7 @@ import result from "./result.ts";
 import getParsedMatches from "../src/getParsedMatches.js";
 import EventParser from "../src/EventParser.js";
 import matches from "../src/matches.js";
+import type {Match} from "../src/types/Match.ts";
 
 const parser = new EventParser()
 test('getSeparator method test', () => {
@@ -15,8 +16,14 @@ test('getSeparator method test', () => {
 })
 
 test('makeEventName method test', () => {
-  matches.forEach((match, index) => {
+  matches.forEach((match: Match, index: number) => {
     expect(parser.makeEventName(match)).toBe(index !== 5 ? result[index].name : null)
+  })
+})
+
+test('formatScore method test', () => {
+  matches.forEach((match: Match, index: number) => {
+    expect(parser.formatScore(match)).toStrictEqual(index !== 5 ? result[index].score : null)
   })
 })
 

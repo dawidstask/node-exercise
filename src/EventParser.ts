@@ -24,8 +24,8 @@ export default class EventParser {
     return `${match.participant1} ${separator} ${match.participant2}`
   }
 
-  formatScore(match) {
-    if (match.sport === 'soccer') {
+  formatScore(match: Match): string | null {
+    if (match.sport === Sport.SOCCER) {
       return match.score;
     } else if (match.sport === 'tennis') {
       var scores = /([0-9]+\:[0-9]+),([0-9]+\:[0-9]+),([0-9]+\:[0-9]+),([0-9]+\:[0-9]+)/.exec(match.score);
@@ -54,7 +54,7 @@ export default class EventParser {
     } else if (match.sport === 'handball') {
       return match.score;
     } else {
-      return "Exception: invalid sport";
+      return null;
     }
   }
 }
