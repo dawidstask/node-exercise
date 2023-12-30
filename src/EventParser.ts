@@ -1,9 +1,12 @@
 import type { Match } from "./types/Match.ts";
 import { Sport } from "./types/Sport.ts";
-import matches from "./matches.ts";
 
 export default class EventParser {
   getSeparator(match: Match): string | null {
+    if (!match?.sport) {
+      return null
+    }
+
     const separatorMap: { [key in Sport]: string | null } = {
       [Sport.SOCCER]: '-',
       [Sport.TENNIS]: 'vs',
@@ -37,16 +40,9 @@ export default class EventParser {
       (match.sport === Sport.TENNIS || match.sport === Sport.VOLLEYBALL) &&
       typeof match.score === 'string'
     ) {
-      const scores = match.score.split(',')
-      const set1 = scores[1];
-      const set2 = scores[2];
-      const set3 = scores[3];
+      const scores: Array<string> = match.score.split(',')
 
-      return "Main score: " + scores[0] + " ("
-        + "set1 " + set1 + ", "
-        + "set2 " + set2 + ", "
-        + "set3 " + set3
-        + ")";
+      return `Main score: ${scores[0]} (set1 ${scores[1]}, set2 ${scores[2]}, set3 ${scores[3]})`;
     }
 
     if (match.sport === Sport.BASKETBALL && typeof match.score === 'object') {
