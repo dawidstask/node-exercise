@@ -1,5 +1,7 @@
 import { test, expect } from '@jest/globals';
+import result from "./result.js";
+import getParsedMatches from "../src/getParsedMatches.js";
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(1 + 2).toBe(3);
-});
+test('result', () => {
+  expect(getParsedMatches()).toStrictEqual(result)
+})
