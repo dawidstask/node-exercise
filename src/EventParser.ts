@@ -2,7 +2,7 @@ import type { Match } from "./types/Match.ts";
 import { Sport } from "./types/Sport.ts";
 
 export default class EventParser {
-  makeEventName(match: Match): string | null {
+  getSeparator(match: Match): string | null {
     const separatorMap: { [key in Sport]: string | null } = {
       [Sport.SOCCER]: '-',
       [Sport.TENNIS]: 'vs',
@@ -12,7 +12,10 @@ export default class EventParser {
       [Sport.SKI_JUMPING]: null,
     }
 
-    const separator: string | null = separatorMap[match.sport]
+    return separatorMap[match.sport]
+  }
+  makeEventName(match: Match): string | null {
+    const separator: string | null = this.getSeparator(match)
 
     if (!separator) {
       return null

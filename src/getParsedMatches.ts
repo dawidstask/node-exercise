@@ -6,9 +6,9 @@ const getParsedMatches = (): Array<Result> => {
   let matchesParsed: Array<Result> = [];
 
   matches.forEach(match => {
-    let parser: EventParser = new EventParser()
-    let name: string | null = parser.makeEventName(match)
-    let score: string | null = parser.formatScore(match)
+    const parser: EventParser = new EventParser()
+    const name: string | null = parser.makeEventName(match)
+    const score: string | null = parser.formatScore(match)
 
     if (name !== null && score !== null) {
       matchesParsed.push({
