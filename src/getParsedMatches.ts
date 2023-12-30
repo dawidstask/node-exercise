@@ -1,21 +1,22 @@
 import matches from "./matches.ts";
 import EventParser from "./EventParser.ts";
+import type { Result } from "./types/Result.ts";
 
-const getParsedMatches = () => {
-  let matchesParsed = [];
+const getParsedMatches = (): Array<Result> => {
+  let matchesParsed: Array<Result> = [];
 
-  for (var i = 0; i < (matches.length); i++) {
-    let parser = new EventParser()
-    let name = parser.makeEventName(matches[i])
-    let score = parser.formatScore(matches[i])
+  matches.forEach(match => {
+    let parser: EventParser = new EventParser()
+    let name: string | null = parser.makeEventName(match)
+    let score: string | null = parser.formatScore(match)
 
-    if (name !== 'Exception: invalid sport' && score !== 'Exception: invalid sport') {
+    if (name !== null && score !== null) {
       matchesParsed.push({
         name,
         score
       })
     }
-  }
+  })
 
   return matchesParsed
 }

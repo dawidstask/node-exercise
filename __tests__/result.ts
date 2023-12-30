@@ -1,4 +1,6 @@
-const result = [
+import type { Result } from "../src/types/Result.ts";
+
+const result: Array<Result> = [
   {
     name: 'Chelsea - Arsenal',
     score: '2:1'

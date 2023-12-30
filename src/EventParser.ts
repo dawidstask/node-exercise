@@ -1,18 +1,24 @@
+import type { Match } from "./types/Match.ts";
+import { Sport } from "./types/Sport.ts";
+
 export default class EventParser {
-  makeEventName(match) {
-    if (match.sport === 'soccer') {
-      return match.participant1 + " - " + match.participant2;
-    } else if (match.sport === 'tennis') {
-      return match.participant1 + " vs " + match.participant2;
-    } else if (match.sport === 'volleyball') {
-      return match.participant1 + " - " + match.participant2;
-    } else if (match.sport === 'handball') {
-      return match.participant1 + " vs " + match.participant2;
-    } else if (match.sport === 'basketball') {
-      return match.participant1 + " - " + match.participant2;
-    } else {
-      return "Exception: invalid sport";
+  makeEventName(match: Match): string | null {
+    const separatorMap: { [key in Sport]: string | null } = {
+      [Sport.SOCCER]: '-',
+      [Sport.TENNIS]: 'vs',
+      [Sport.VOLLEYBALL]: '-',
+      [Sport.HANDBALL]: 'vs',
+      [Sport.BASKETBALL]: '-',
+      [Sport.SKI_JUMPING]: null,
     }
+
+    const separator: string | null = separatorMap[match.sport]
+
+    if (!separator) {
+      return null
+    }
+
+    return `${match.participant1} ${separator} ${match.participant2}`
   }
 
   formatScore(match) {

@@ -1,4 +1,6 @@
-const matches = [
+import type { Match } from "./types/Match.ts";
+
+const matches: Array<Match> = [
   {
     sport: 'soccer',
     participant1: 'Chelsea',
